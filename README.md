@@ -34,15 +34,32 @@ module "your_custom_name_for_your_instance_of_this_module" {
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- The following Inputs example will be over-written by pre-commit hooks,
-  and is here only as an example in case you opt not to use the hooks. -->
 ## Inputs
 
-Table of available module inputs in the format:
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| private\_subnet\_ip\_cidr\_range | The primary CIDR range for the private subnet. | string | `""` | no |
+| private\_subnet\_name | The primary private subnet name. | string | `""` | no |
+| project | The project id of the project you want to create the bucket in. | string | `""` | no |
+| public\_subnet\_ip\_cidr\_range | The primary CIDR range for the public subnet. | string | `""` | no |
+| public\_subnet\_name | The primary public subnet name. | string | `""` | no |
+| region | The regions where resources are generated. | string | `""` | no |
+| routing\_mode | Sets dynamic routing scope to global or regional.  Must be regional or global. | string | `""` | no |
+| vpc\_network\_name | The name of your vpc-network. | string | `""` | no |
+| vpc\_subnet\_prefix | prefix naming for any subnet created via the module. | string | `"vpc-subnet"` | no |
 
-|Name | Description | Type |Default | Required
---- | --- | --- | --- | --- |
-`inputName`| Description of this input | input type | `default value` | boolean
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| vpc\_network\_gateway\_ip | The ip of the gateway assigned to the vpc-network. |
+| vpc\_network\_name | The name of your created vpc-network |
+| vpc\_network\_self\_link | The URI of the created vpc-network resource. |
+| vpc\_private\_subnet\_name | The name of your created private subnet. |
+| vpc\_private\_subnet\_self\_link | The URI of the created private subnet resource. |
+| vpc\_public\_subnet\_name | The name of your created public subnet. |
+| vpc\_public\_subnet\_self\_link | The URI of the created public subnet resource. |
+| vpc\_subnet\_prefix | prefix naming for any subnet created via the module. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
