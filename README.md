@@ -23,13 +23,23 @@ Sample module block showing required fields configured.  You can have
 multiple examples if it makes sense for the module.
 
 ```hcl
+locals {
+  public_subnet_name  = "${var.environment}-${module.vpc.vpc_subnet_prefix}-pub-${var.region_data["region"]}"
+  private_subnet_name = "${var.environment}-${module.vpc.vpc_subnet_prefix}-pri-${var.region_data["region"]}"
+}
+
 module "your_custom_name_for_your_instance_of_this_module" {
-  source                = "git@github.com:thesis/this-module-name.git"
-  name                  = "name-of-your-project"
-  org_id                = "your-org-id"
-  billing_account       = "your-billing-account"
-  project_owner_members = ["john@email.co", "lilly@email.co",]
-  location              = "us-central1"
+  source           = "git@github.com:thesis/terraform-google-vpc.git"
+  vpc_network_name = "${var.vpc_network_name}"
+  project          = "${module.project.project_id}"
+  region           = "${var.region_data["region"]}"
+  routing_mode     = "${var.routing_mode}"
+
+  public_subnet_name          = "${local.public_subnet_name}"
+  public_subnet_ip_cidr_range = "${var.public_subnet_ip_cidr_range}"
+
+  private_subnet_name          = "${local.private_subnet_name}"
+  private_subnet_ip_cidr_range = "${var.private_subnet_ip_cidr_range}"
 }
 ```
 
@@ -66,8 +76,17 @@ module "your_custom_name_for_your_instance_of_this_module" {
 <!-- Notes section is optional -->
 ## Notes
 
-Anything quirky about the module folks may want to know about. Relevant
-links or additional useful information.  Format is up to you.
+Be aware: the naming convention we use at Thesis leans towards verbosity, in
+the interest of mking any resource's origin Very explicit. However, this can
+butt up against GCP resource character limits.
+
+In this module's case, some interpolated names may exceed the character limit
+when using the GCP environment name as a prefix, the the environment name
+exceeds 11 characters.
+
+For instance: the Thesis default for `vpc_network_name` variable is
+`<env-name>-vpc-network` - but in some cases had to be abbreviated to
+`<en>-vpc-network`.
 
 <!-- License is required -->
 ## License
