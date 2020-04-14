@@ -2,7 +2,7 @@
 <!-- Module Name and description are required -->
 # GCP VPC Module
 
-<!-- TODO: Add description -->
+Creates a regional VPC with two subnets: public and private.
 
 <!-- Compatibility section is optional -->
 ## Compatibility
@@ -76,17 +76,16 @@ module "your_custom_name_for_your_instance_of_this_module" {
 <!-- Notes section is optional -->
 ## Notes
 
-Be aware: the naming convention we use at Thesis leans towards verbosity, in
-the interest of mking any resource's origin Very explicit. However, this can
-butt up against GCP resource character limits.
+Be aware: the naming conventions we use at Thesis lean towards verbosity, in the
+interest of mking any resource's origin Very explicit. However, this can
+collide with GCP resource character limits.
 
 In this module's case, some interpolated names may exceed the character limit
-when using the GCP environment name as a prefix, the the environment name
+when using the GCP environment name as a prefix, if the environment name
 exceeds 11 characters.
 
-For instance: the Thesis default for `vpc_network_name` variable is
-`<env-name>-vpc-network` - but in some cases had to be abbreviated to
-`<en>-vpc-network`.
+For instance: the Thesis standard  vpc_network_name is `<env-name>-vpc-network`,
+but in some cases had to be abbreviated to `<en>-vpc-network`.
 
 <!-- License is required -->
 ## License
