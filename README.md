@@ -19,27 +19,27 @@ along the following lines:
 There are multiple examples included in the [examples](./examples/) folder but
 simple usage is as follows:
  -->
-Sample module block showing required fields configured.  You can have
-multiple examples if it makes sense for the module.
+
+Module usage is as follows:
 
 ```hcl
 locals {
-  public_subnet_name  = "${var.environment}-${module.vpc.vpc_subnet_prefix}-pub-${var.region_data["region"]}"
-  private_subnet_name = "${var.environment}-${module.vpc.vpc_subnet_prefix}-pri-${var.region_data["region"]}"
+  public_subnet_name  = "name-of-your-public-subnet"
+  private_subnet_name = "name-of-your-private-subnet"
 }
 
 module "your_custom_name_for_your_instance_of_this_module" {
   source           = "git@github.com:thesis/terraform-google-vpc.git"
-  vpc_network_name = "${var.vpc_network_name}"
-  project          = "${module.project.project_id}"
-  region           = "${var.region_data["region"]}"
-  routing_mode     = "${var.routing_mode}"
+  vpc_network_name = "name-of-your-vpc-network"
+  project          = "gcp-id-of-your-project"
+  region           = "region-name"
+  routing_mode     = "regional-or-global"
 
   public_subnet_name          = "${local.public_subnet_name}"
-  public_subnet_ip_cidr_range = "${var.public_subnet_ip_cidr_range}"
+  public_subnet_ip_cidr_range = "CIDR-range-for-public-subnet"
 
   private_subnet_name          = "${local.private_subnet_name}"
-  private_subnet_ip_cidr_range = "${var.private_subnet_ip_cidr_range}"
+  private_subnet_ip_cidr_range = "CIDR-range-for-private-subnet"
 }
 ```
 
