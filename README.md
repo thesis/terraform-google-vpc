@@ -23,11 +23,6 @@ simple usage is as follows:
 Module usage is as follows:
 
 ```hcl
-locals {
-  public_subnet_name  = "name-of-your-public-subnet"
-  private_subnet_name = "name-of-your-private-subnet"
-}
-
 module "your_custom_name_for_your_instance_of_this_module" {
   source           = "git@github.com:thesis/terraform-google-vpc.git"
   vpc_network_name = "name-of-your-vpc-network"
@@ -35,10 +30,10 @@ module "your_custom_name_for_your_instance_of_this_module" {
   region           = "region-name"
   routing_mode     = "regional-or-global"
 
-  public_subnet_name          = "${local.public_subnet_name}"
+  public_subnet_name          = "name-of-your-public-subnet"
   public_subnet_ip_cidr_range = "CIDR-range-for-public-subnet"
 
-  private_subnet_name          = "${local.private_subnet_name}"
+  private_subnet_name          = "name-of-your-private-subnet"
   private_subnet_ip_cidr_range = "CIDR-range-for-private-subnet"
 }
 ```
@@ -74,18 +69,8 @@ module "your_custom_name_for_your_instance_of_this_module" {
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- Notes section is optional -->
-## Notes
+<!-- ## Notes -->
 
-Be aware: the naming conventions we use at Thesis lean towards verbosity, in the
-interest of mking any resource's origin Very explicit. However, this can
-collide with GCP resource character limits.
-
-In this module's case, some interpolated names may exceed the character limit
-when using the GCP environment name as a prefix, if the environment name
-exceeds 11 characters.
-
-For instance: the Thesis standard  vpc_network_name is `<env-name>-vpc-network`,
-but in some cases had to be abbreviated to `<en>-vpc-network`.
 
 <!-- License is required -->
 ## License
